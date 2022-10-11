@@ -1,0 +1,13 @@
+#image-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  /*parecido com padding: 5px na imagem*/
+  /*height: 300px;*/
+}
+
+img {
+  /*padding: 5px;*/
+  width: 50%;
+  flex-grow: 1;
+}
