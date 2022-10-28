@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  list-style: none;
+  box-sizing: border-box;
+  border: 0
+}
+
+header {
+  background-color: rgb(181, 121, 238);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 40px;
+  gap: 20px;
+}
+
+header img {
+  width: 50px;
+}
+
+main {
+  margin: 40px 5%;
+}
+
+footer {
+  background-color: rgb(181, 121, 238);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
