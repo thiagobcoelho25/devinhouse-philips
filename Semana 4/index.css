@@ -40,6 +40,7 @@ main {
   flex: 1;
   align-items: center;
   justify-content: center;
+  gap: 50px;
 }
 
 form {
@@ -52,6 +53,11 @@ input,
 select {
   padding: 8px;
   color: #000;
+}
+
+/* Remove arrows dos inputs de number do Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 button {
