@@ -7,7 +7,7 @@ validarSenhasConferem = (senha, confirmacao) => {
   // if (evento.target.senha.value === evento.target.confirmacao.value) {
   //   return true;
   // }
-  return senha.value === confirmacao.value ? true : false
+  return senha === confirmacao ? true : false
 }
 
 geradorNumeroDeConta = () => Math.floor(1000 + Math.random() * 90000)
@@ -17,7 +17,7 @@ criarConta = (evento) => {
 
   const { nome, cpf, celular, senha, confirmacao } = evento.target
 
-  if (validarSenhasConferem(senha, confirmacao)) {
+  if (validarSenhasConferem(senha.value, confirmacao.value)) {
     const conta = {
       nome: nome.value,
       cpf: cpf.value,
@@ -34,6 +34,53 @@ criarConta = (evento) => {
   }
 
 }
+
+validarConta = (conta, senha) => {
+
+}
+
+const sacar = (conta, valor) => {
+
+}
+
+const depositar = (conta, valor) => {
+
+}
+
+const saldo = (conta) => {
+
+}
+
+const efetuarOperacao = (evento) => {
+  evento.preventDefault();
+
+  const conta = parseInt(evento.target.conta.value);
+  const senha = evento.target.senha.value;
+  const valor = parseInt(evento.target.valor.value);
+
+  const contaValida = validarConta(conta, senha);
+
+  if (contaValida) {
+    switch (evento.target.operacao.value) {
+      case 'SAQUE':
+        sacar(conta, valor);
+        break;
+      case 'DEPOSITO':
+        depositar(conta, valor);
+        break;
+      case 'SALDO':
+        saldo(conta);
+        break;
+      default:
+        alert('Operação inválida');
+    }
+  } else {
+    alert('Conta ou senha inválida');
+  }
+};
+
+const formAcoes = document.getElementById('form-acoes');
+formAcoes.addEventListener('submit', efetuarOperacao);
 
 const desabilitarBotaoOperacaoCasoSaldo = (evento) => {
   const valor = document.getElementById('valor');
