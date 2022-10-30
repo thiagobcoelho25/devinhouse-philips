@@ -35,6 +35,15 @@ criarConta = (evento) => {
 
 }
 
+const desabilitarBotaoOperacaoCasoSaldo = (evento) => {
+  const valor = document.getElementById('valor');
+
+  valor.disabled = evento.target.value === 'SALDO';
+};
+
+const operacao = document.getElementById('operacao');
+operacao.addEventListener('change', desabilitarBotaoOperacaoCasoSaldo);
+
 const mascaraTelefone = (valor) => {
   valor = valor.replace(/\D/g, "")
   valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
