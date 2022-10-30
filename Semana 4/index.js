@@ -47,12 +47,18 @@ validarConta = (conta, senha) => {
   return contaCliente && contaCliente.senha === senha ? contaCliente : null;
 }
 
-const validarValor = (valor) => {
-  return !isNaN(valor) && valor > 0;
-};
+const validarValor = (valor) => !isNaN(valor) && valor > 0;
+
+const validarSaldo = (conta, valor) => conta.saldo >= valor;
 
 const sacar = (conta, valor) => {
+  if (validarValor(valor) && validarSaldo(conta, valor)) {
+    conta.saldo = conta.saldo - valor
 
+    alert(`Saque efetuado com sucesso! Saldo atual: ${saldoAtual}`);
+  } else {
+    alert('Saldo insuficiente ou Valor inválido');
+  }
 }
 
 const depositar = (conta, valor) => {
