@@ -35,8 +35,16 @@ criarConta = (evento) => {
 
 }
 
-validarConta = (conta, senha) => {
+const obterConta = (conta) => {
+  const contaCliente = lista_contas.find((c) => c.conta === conta);
 
+  return contaCliente;
+};
+
+validarConta = (conta, senha) => {
+  const contaCliente = obterConta(conta);
+
+  return contaCliente && contaCliente.senha === senha ? contaCliente : null;
 }
 
 const sacar = (conta, valor) => {
@@ -47,9 +55,7 @@ const depositar = (conta, valor) => {
 
 }
 
-const saldo = (conta) => {
-
-}
+const saldo = (conta) => alert(`Saldo atual: ${conta.saldo}`);
 
 const efetuarOperacao = (evento) => {
   evento.preventDefault();
@@ -63,13 +69,13 @@ const efetuarOperacao = (evento) => {
   if (contaValida) {
     switch (evento.target.operacao.value) {
       case 'SAQUE':
-        sacar(conta, valor);
+        sacar(contaValida, valor);
         break;
       case 'DEPOSITO':
-        depositar(conta, valor);
+        depositar(contaValida, valor);
         break;
       case 'SALDO':
-        saldo(conta);
+        saldo(contaValida);
         break;
       default:
         alert('Operação inválida');
