@@ -1,0 +1,13 @@
+<div class="list-group w-50">
+  <div *ngFor="let item of DADOS" href="#" class="list-group-item list-group-item-action" aria-current="true"
+    [ngClass]="{'list-group-item-success': item.lido === true}">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{item.title}}</h5>
+      <small>{{item.time}}</small>
+    </div>
+    <p class="mb-1">{{item.subtitle}}</p>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-outline-primary" (click)="FuncaoAlterarLido(item.id)">Primary</button>
+    </div>
+  </div>
+</div>
