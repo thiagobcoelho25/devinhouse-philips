@@ -1,0 +1,10 @@
+<div class="vh-100">
+  <app-navbar (actionOutput)="consoleLogInput($event)"></app-navbar>
+  <main class="d-flex flex-column align-items-center justify-content-center gap-5 p-5">
+    <app-form-materia></app-form-materia>
+    <app-item-card
+      [personagem]="{imagem: 'https://rollingstone.uol.com.br/media/_versions/thewitcher_widelg.jpg', nome: 'Geralt de Rivia', nomeAtor: 'Henry Cavill', descricao: 'Geralt de Rívia (Henry Cavill), um dos últimos bruxos restantes na Terra'}">
+    </app-item-card>
+    <app-form-exer07></app-form-exer07>
+  </main>
+</div>

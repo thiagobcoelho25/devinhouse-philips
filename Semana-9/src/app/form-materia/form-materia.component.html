@@ -1,0 +1,57 @@
+<form action="" class="formulario rounded p-3">
+  <legend>formulário de registro de matérias</legend>
+  <div class="mb-3">
+    <label for="nomeInput" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="nomeInput">
+  </div>
+  <div class="mb-3">
+    <label for="cargaAulasInput" class="form-label">carga horária de horas aula</label>
+    <input type="number" class="form-control" id="cargaAulasInput">
+  </div>
+  <div class="mb-3">
+    <label for="escolaInput" class="form-label">Escola</label>
+    <input type="text" class="form-control" id="escolaInput">
+  </div>
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="professorInputGroupSelect">Professor(a)</label>
+    <select class="form-select" id="professorInputGroupSelect">
+      <option selected disabled hidden>Selecione</option>
+      <option value="Otávio">Otávio</option>
+      <option value="Vivian">Vivian</option>
+      <option value="Leandro">Leandro</option>
+      <option value="Cláudia">Cláudia</option>
+    </select>
+  </div>
+
+  <div class="d-flex mb-3 justify-content-around">
+    <label class="form-check-text" for="professorInputRadio">matéria é opcional?</label>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="opcionalRadioOptions1" value="sim">
+      <label class="form-check-label" for="opcionalRadioOptions1">Sim</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="opcionalRadioOptions2" value="nao">
+      <label class="form-check-label" for="opcionalRadioOptions2">Não</label>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Submit</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-success text-white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Formulário enviado com sucesso
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
