@@ -1,0 +1,12 @@
+<app-filtro (output_filtro)="returnOutputFiltro($event)" [input_lista_botoes]="lista_botoes"
+  [input_botao_atual]="output_filtro"></app-filtro>
+
+<!-- <ng-container *ngFor="let item of base_dados_filtrada">
+  <app-card [card_elemento]="item"></app-card>
+</ng-container> -->
+
+<div class="container-notifications mx-3 mx-md-auto offset-md-2 col-md-7">
+  <div class="list-group d-flex mt-5">
+    <app-card *ngFor="let item of base_dados_filtrada" [card_elemento]="item"></app-card>
+  </div>
+</div>

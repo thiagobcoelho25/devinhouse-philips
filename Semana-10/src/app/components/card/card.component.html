@@ -1,0 +1,22 @@
+<a class="list-group-item list-group-item-action d-flex gap-3 py-3" [ngClass]="{'opacity-50': card_elemento?.lido}">
+  <img src="{{ card_elemento?.imagem }}" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0" />
+  <div class="d-flex gap-2 w-100 justify-content-between">
+    <div>
+      <h6 class="mb-0">{{ card_elemento?.titulo }}</h6>
+      <p class="mb-0 opacity-75">
+        {{ card_elemento?.descricao }}
+      </p>
+    </div>
+
+    <small class="text-nowrap" ngClass="">
+      {{ card_elemento?.tempoPublicacao }}
+      <!-- <span *ngIf="!card_elemento?.lido" class="badge rounded-pill text-bg-secondary" ngClass="ms-2"
+          (click)="lerNotificacao(indice)">
+          <i class="bi bi-eye"></i>
+        </span> -->
+      <span *ngIf="!card_elemento?.lido" class="badge rounded-pill text-bg-secondary" ngClass="ms-2">
+        <i class="bi bi-eye"></i>
+      </span>
+    </small>
+  </div>
+</a>
