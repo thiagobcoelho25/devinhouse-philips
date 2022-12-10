@@ -13,11 +13,11 @@ export class FiltroComponent {
   @Input('input_botao_atual')
   botao_atual: string = ""
 
-  @Output()
-  output_filtro: EventEmitter<string> = new EventEmitter<string>();
+  // @Output()
+  // output_filtro: EventEmitter<string> = new EventEmitter<string>();
 
-  getTypeButton(valro_bottao: string) {
-    this.botao_atual = valro_bottao
-    this.output_filtro.emit(valro_bottao)
-  }
+  // getTypeButton(valro_bottao: string) {
+  //   this.botao_atual = valro_bottao
+  //   this.output_filtro.emit(valro_bottao)
+  // }
 }

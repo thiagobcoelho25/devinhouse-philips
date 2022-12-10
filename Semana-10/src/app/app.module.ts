@@ -19,13 +19,14 @@ import { AddCurrencySpaceBetweenPipe } from './pipes/pipe-route-lista';
     FooterComponent,
     HomeComponent,
     AboutComponent,
-    CardComponent
+    CardComponent,
+    AddCurrencySpaceBetweenPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AddCurrencySpaceBetweenPipe],
+  // providers: [AddCurrencySpaceBetweenPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

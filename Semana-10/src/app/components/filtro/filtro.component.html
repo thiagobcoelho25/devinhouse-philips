@@ -2,8 +2,12 @@
   <div class="btn-group" role="group" aria-label="Basic example">
     <!-- Possibilidade de usar radio button no lugar
     https://getbootstrap.com/docs/5.0/components/button-group/-->
-    <button *ngFor="let item of lista_botoes" (click)="getTypeButton(item)" type="button"
-      class="btn btn-outline-secondary" [ngClass]="{'active': botao_atual === item }">{{item}}</button>
+    <button *ngFor="let item of lista_botoes" type="button" class="btn btn-outline-secondary"
+      [ngClass]="{'active': botao_atual === item }"
+      [routerLink]="['/home', item | lowercase | addbetweenspace ]">{{item}}</button>
   </div>
 </div>
-<!-- routerLink="{{item | lowercase | addbetweenspace }}" -->
+
+<!-- <button *ngFor="let item of lista_botoes" (click)="getTypeButton(item)" type="button"
+      class="btn btn-outline-secondary" [ngClass]="{'active': botao_atual === item }"
+      [routerLink]="['/home', item | lowercase | addbetweenspace ]">{{item}}</button> -->

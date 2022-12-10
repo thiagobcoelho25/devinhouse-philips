@@ -1,5 +1,7 @@
-<app-filtro (output_filtro)="returnOutputFiltro($event)" [input_lista_botoes]="lista_botoes"
-  [input_botao_atual]="output_filtro"></app-filtro>
+<!-- <app-filtro (output_filtro)="returnOutputFiltro($event)" [input_lista_botoes]="lista_botoes"
+  [input_botao_atual]="output_filtro"></app-filtro> -->
+
+<app-filtro [input_lista_botoes]="lista_botoes" [input_botao_atual]="output_filtro"></app-filtro>
 
 <!-- <ng-container *ngFor="let item of base_dados_filtrada">
   <app-card [card_elemento]="item"></app-card>
