@@ -1,0 +1,24 @@
+<article class="article-content" id="{{artigo.id}}">
+  <h2>{{artigo.titulo}}</h2>
+  <div class="article-content-subtext">
+    <div class="article-content-subtext-text">
+      <h4>Linguagem/Skill: </h4>
+      <p>{{artigo.linguagem_skill}}</p>
+    </div>
+    <div class="article-content-subtext-text">
+      <h4>Categoria: </h4>
+      <p>{{artigo.categoria}}</p>
+    </div>
+    <textarea name="descricao" cols="30" rows="10">{{artigo.descricao}}</textarea>
+  </div>
+  <div class="article-buttons">
+    <button id="{{artigo.id}}" (click)="deleteArticle()"><i class="fa-regular fa-trash-can"></i></button>
+    <button id="{{artigo.id}}"><i class="fa-regular fa-pen-to-square"></i></button>
+    <button id="{{artigo.id}}" class="youtube-button" (click)="artigo.youtube_link && changeDisplayYoutube()"><i
+        class="fa-brands fa-youtube"></i></button>
+  </div>
+  <!-- https://web.dev/iframe-lazy-loading/ -->
+  <!-- Tenho que usar o loading="lazy" senão QUALQUER CLICK EM QUALQUER COMPONENTE dispara a requisição no NETWORK -->
+  <iframe *ngIf="artigo.youtube_link" [ngStyle]="display" [src]="sanitizerVideoUrl()" height="500px" width="700px"
+    frameborder="0" loading="lazy"></iframe>
+</article>
