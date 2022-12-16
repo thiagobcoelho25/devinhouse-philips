@@ -1,0 +1,8 @@
+<section class="left-side">
+  <app-card [cards]="cards"></app-card>
+  <app-search (output-search)="searchFilter($event)" (clear-search)="clearSearchFilter()"></app-search>
+  <main id="main_content" class="main-content">
+    <app-article *ngFor="let artigo of artigos_filtrados" [article-input]="artigo"
+      (delecao-article-output)="deleteArticle($event)"></app-article>
+  </main>
+</section>

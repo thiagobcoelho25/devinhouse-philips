@@ -1,0 +1,79 @@
+<form id="form-post" [formGroup]="right_side_form" (ngSubmit)="onSubmit()">
+  <div class="form-container-input-label">
+    <label for="titulo">Título</label>
+    <input id="titulo" type="text" placeholder="Digite um título" formControlName="tituloFormControl" appMaxlength
+      [max_number]="valores_min_max.titulo[1]">
+    <div
+      *ngIf="right_side_form.controls['tituloFormControl'].invalid && (right_side_form.controls['tituloFormControl'].dirty || right_side_form.controls['tituloFormControl'].touched)"
+      class="alert alert-danger">
+      <p class="text-danger"
+        *ngIf="(right_side_form.get('tituloFormControl')?.hasError('maxlength') || right_side_form.get('tituloFormControl')?.hasError('minlength'))">
+        Titulo deve ter entre {{valores_min_max.titulo[0]}} e {{valores_min_max.titulo[1]}}
+        caracteres</p>
+      <p class="text-danger" *ngIf="right_side_form.controls['tituloFormControl'].errors?.['required']">
+        Titulo é obrigatorio
+      </p>
+    </div>
+  </div>
+
+  <div class="form-container-input-label">
+    <label for="linguagem_skill">Linguagem/Skill</label>
+    <input id="linguagem_skill" type="text" placeholder="Digite uma linguagem ou skill"
+      formControlName="linguagemSkillFormControl" appMaxlength [max_number]="valores_min_max.linguagem_skill[1]">
+    <div
+      *ngIf="right_side_form.controls['linguagemSkillFormControl'].invalid && (right_side_form.controls['linguagemSkillFormControl'].dirty || right_side_form.controls['linguagemSkillFormControl'].touched)"
+      class="alert alert-danger">
+      <p class="text-danger"
+        *ngIf="(right_side_form.get('linguagemSkillFormControl')?.hasError('maxlength') || right_side_form.get('linguagemSkillFormControl')?.hasError('minlength'))">
+        Linguagem ou Skill deve ter entre {{valores_min_max.linguagem_skill[0]}} e
+        {{valores_min_max.linguagem_skill[1]}} caracteres</p>
+      <p class="text-danger" *ngIf="right_side_form.controls['linguagemSkillFormControl'].errors?.['required']">
+        Linguagem ou Skill é obrigatorio
+      </p>
+    </div>
+  </div>
+
+  <div class="form-container-input-label">
+    <label for="categoria">Categoria</label>
+    <select id="categoria" name="categoria" formControlName="categoriaFormControl">
+      <option value="" selected disabled hidden>Selecione uma categoria</option>
+      <option *ngFor="let item of categorias" value="{{item}}">{{item}}</option>
+    </select>
+    <div
+      *ngIf="right_side_form.controls['categoriaFormControl'].invalid && (right_side_form.controls['categoriaFormControl'].dirty || right_side_form.controls['categoriaFormControl'].touched)"
+      class="alert alert-danger">
+      <p class="text-danger" *ngIf="right_side_form.controls['categoriaFormControl'].errors?.['required']">
+        Categoria é obrigatorio
+      </p>
+    </div>
+  </div>
+
+  <div class="form-container-input-label">
+    <label for="descricao">Descrição</label>
+    <textarea name="descricao" id="descricao" cols="30" rows="10"
+      placeholder="Escreva aqui o detalhamento da sua dica..." formControlName="descricaoFormControl" appMaxlength
+      [max_number]="valores_min_max.descricao[1]"></textarea>
+    <div
+      *ngIf="right_side_form.controls['descricaoFormControl'].invalid && (right_side_form.controls['descricaoFormControl'].dirty || right_side_form.controls['descricaoFormControl'].touched)"
+      class="alert alert-danger">
+      <p class="text-danger"
+        *ngIf="(right_side_form.get('descricaoFormControl')?.hasError('maxlength') || right_side_form.get('descricaoFormControl')?.hasError('minlength'))">
+        Descrição deve ter entre {{valores_min_max.descricao[0]}} e
+        {{valores_min_max.descricao[1]}} caracteres</p>
+      <p class="text-danger" *ngIf="right_side_form.controls['descricaoFormControl'].errors?.['required']">
+        Descrição é obrigatorio
+      </p>
+    </div>
+  </div>
+
+  <div class="form-container-input-label">
+    <label for="youtube_link">Video do YouTube</label>
+    <input id="youtube_link" name="youtube_link" type="url" placeholder="https://suaurl.com"
+      formControlName="youtubeLinkFormControl">
+  </div>
+
+  <div class="form-container-buttons">
+    <button id="reset-form" type="reset" class="button">Limpar</button>
+    <button id="save-form" type="submit" class="button">Salvar</button>
+  </div>
+</form>
