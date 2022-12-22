@@ -1,0 +1,8 @@
+<div class="form-container-input-label">
+  <label for="titulo">Título</label>
+  <input id="titulo" type="text" placeholder="Digite um título" [formControl]="formTitulo">
+  <ng-template #validacao_template>
+    <p>Precisa ter pelo menos 5 caracteres</p>
+  </ng-template>
+</div>
+<div *ngIf="formTitulo.invalid; then validacao_template"></div>

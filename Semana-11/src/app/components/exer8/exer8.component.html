@@ -1,0 +1,20 @@
+<div class="container">
+  <label for="basic-url" class="form-label">digite uma tarefa</label>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon3">texto</span>
+    <input type="text" class="form-control" [(ngModel)]="input_string">
+    <button type="button" class="btn btn-primary" (click)="add()">Primary</button>
+  </div>
+</div>
+<div class="container">
+  <ng-container *ngIf="lista.length > 0; else lista_vazia">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of lista">{{item}}</li>
+
+    </ul>
+  </ng-container>
+</div>
+
+<ng-template #lista_vazia>
+  <p>Lista Vazia</p>
+</ng-template>

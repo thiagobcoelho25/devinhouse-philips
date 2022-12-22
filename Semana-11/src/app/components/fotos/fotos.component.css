@@ -1,0 +1,8 @@
+.scrollable {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.card {
+  height: 600px;
+}

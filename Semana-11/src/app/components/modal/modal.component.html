@@ -1,0 +1,11 @@
+<div class="card">
+  <a (click)="changeShowModal()">Open Demo Modal</a>
+</div>
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal__content">
+    <ng-content select=".titulo"></ng-content>
+    <ng-content select=".descricao"></ng-content>
+    <a class="modal__close" (click)="changeShowModal()">&times;</a>
+  </div>
+</div>
