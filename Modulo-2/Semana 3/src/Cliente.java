@@ -10,7 +10,6 @@ public class Cliente {
         this.idade = idade;
         this.id = id;
     }
-
     public Cliente(double peso, double altura) {
         this.peso = peso;
         this.altura = altura;
