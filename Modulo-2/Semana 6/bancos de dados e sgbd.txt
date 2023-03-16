@@ -1,0 +1,22 @@
+Os bancos Relacionais trabalham como tabelas em matriz, com linhas e colunas. E podemos ter diversas tabelas em um conjunto de dados.
+
+Os dados em um banco de dados Relacional são operados por meio do SQL,Structured Query Language.  Foi desenvolvido inicialmente pela IBM nos anos 1970 e após isso vem sendo utilizado como padrão para diversos Bancos de Dados.
+
+As maiores diferenças entre uma planilha de dados e um Banco de Dados é o volume de informações e o número de acessos que um banco de dados tem, que é muito maior do que uma planilha comum.
+
+Esses bancos de dados são muito utilizados para ERPs e para CRMs, podem também ser utilizados para qualquer outro tipo de aplicação.
+
+Os bancos não relacionais trabalham com arquivos de texto, sendo assim são estruturas mais soltas e que podem ser trabalhadas de formas mais rápidas.
+
+- São normalmente baseados em nuvem e em serviços de grandes empresas. 
+- Utilizam NoSQL, ou Not Only SQL.
+
+São utilizados para tarefas que requerem muita rapidez com os dados.
+
+
+Os bancos de dados em si são locais na memória do computador onde os dados são armazenados. Os SGBDs acessam o banco de dados e nos permitem realizar operações diretamente neles.
+
+Essas operações vão de criar tabelas, a ler tabelas, inserir dados, deletar dados e outras funcionalidades que temos dentros desses softwares.
+
+
+
