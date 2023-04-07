@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+  <div th:each="produto: ${produtos}">
+    <div th:text="${produto.nome}"></div>
+    <div th:text="${produto.descricao}"></div>
+    <div th:text="${#temporals.format(produto.data_lancamento, 'dd/MM/yyyy')}"></div>
+    <div th:text="${produto.preco}"> </div>
+      <form action="#"
+            th:action="@{'/produto/{id}'(id=${produto.id})}"
+            th:method="post">
+          <input type="submit" name="_method" value="delete">
+      </form>
+    <hr>
+    <br>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+* Definir o que é JWT, suas utilizações e o seu modo de funcionamento:
+	R: JWT ou JSON Web Token é um padrão da indústria definido pela RFC7519 que tem como objetivo transmitir ou armazenar de forma compacta e segura objetos JSON entre diferentes aplicações. O JWT é digitalmente assinado usando uma chave secreta com o algoritmo HMAC ou um par de chaves pública e privada RSA ou ECDSA.
+
+Criar um passo a passo de uma requisição que utiliza o JWT:
+	R: 1 - POST /users/auth envia username e password para o servidor
+	   2 - Verifica as credencias de autenticação e caso estejam validas cria e retorna o token JWT
+	   3 - Cliente envia o token JWT no Header Authorization nas demais requisições
+	   4 - Verifica a assinatura do token JWT, caso esteja correta, extrai o username do usuario contido no token JWT
+	   5 - Envia respota apropriada para o cliente.
+
+Gerar um JWT de exemplo que possa ser lido e utilizado por um programa:
+	R: {
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022
+}
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c

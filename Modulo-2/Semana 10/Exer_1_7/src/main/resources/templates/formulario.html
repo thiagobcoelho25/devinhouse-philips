@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/produto}"
+      th:object="${ProdutoDto}"
+      method="post">
+  <label for="nome" >Nome</label>
+  <input type="text" th:field="*{nome}"  id="nome" placeholder="Nome">
+  <label for="descricao" >descição</label>
+  <input type="text" th:field="*{descricao}"  id="descricao" placeholder="Descrição">
+  <label for="data_lancamento" >data de lancamento</label>
+  <input type="date" th:field="*{data_lancamento}"  id="data_lancamento" placeholder="Data de Lancamento">
+  <label for="preco" >Preço</label>
+  <input type="number" th:field="*{preco}"  id="preco" placeholder="Preçço">
+
+  <!--    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">-->
+  <!--      -->
+  <!--    </span>-->
+
+  <input type="submit" value="Add Produto">
+
+</form>
+</body>
+</html>

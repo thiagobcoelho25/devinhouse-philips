@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Produto</title>
+</head>
+<body>
+<div>
+    <p>Nome Produto:</p>
+    <p th:text="${produto.nome}"></p>
+</div>
+
+<div>
+    <p>Descrição Produto:</p>
+    <p th:text="${produto.descricao}"></p>
+</div>
+
+<div>
+    <p>Data Lançamento Produto:</p>
+    <p th:text="${#temporals.format(produto.data_lancamento, 'dd/MM/yyyy')}"></p>
+</div>
+
+<div>
+    <p>Valor Produto:</p>
+    <p th:text="${produto.preco}"> </p>
+</div>
+
+</body>
+</html>
