@@ -1,0 +1,238 @@
+___ DOCKER-COMPOSE ___
+
+vimos que criar os container de nossa aplicação apenas do modo imperativo (docker run) nem sempre é vantajoso, haja vista a quantidade de parâmetros e quantidade de containers que uma aplicação possa ter. Com isso podemos jogar todas essas definições em um arquivo .yaml e subir tudo de uma vez, de forma declarativa.
+
+nosso arquivo yaml para PHP-APACHE + MYSQL ficou:
+
+version: "3"
+services:
+
+  web:
+    image: php:7.4-apache  
+    container_name: php
+    ports:
+      - "8080:80"
+    volumes:
+      - C:\Users\gabriel.ti\projeto:/var/www/html/projeto
+
+  banco:
+    image: mysql:5.7.24
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - philips:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD:rootdb__
+
+volumes:
+  philips:
+
+
+# comando para executar o compose file
+
+docker-compose -f docker-compose.yml up -d  >> criar e iniciar serviços definidos no .yaml
+docker-compose -f docker-compose.yml down >> parar e excluir tudo que foi criado a partir do arquivo . yaml
+
+lembrando que não precisamos definir network para esse caso. O docker criará uma network em comum para ambos os serviços quando aplicarmos o arquivo. É subentendido pelo docker que é nossa vontade que os servicos "web" e "banco" se comuniquem pois estão definidos no mesmo arquivo. 
+
+
+___ JAVA ___
+
+Posteriormente vimos mais um exemplo agora usando Java. Abaixo, temos um docker run para criar container para compilar um arquivo .java. Observem a sintaxe:
+
+docker run --rm -v C:\Users\gabriel.ti\java:/usr/src/myapp openjdk:11 javac /usr/src/myapp/Main.java
+
+--rm informa que container deve ser excluído quando ele for encerrado ou completar execução.
+-v C:\Users\gabriel.ti\java:/myapp > copiando o arquivo .java pra dentro do container
+javac Main.java > comando a ser executado dentro do container assim que ele ficar UP. Quando esse comando de compilação for completado o container será encerrado. 
+
+se optarmos para agora rodar a aplicação que foi compilada podemos rodar o seguinte container:
+
+docker run -v C:\Users\gabriel.ti\java:/myapp -w /myapp openjdk:11 java HelloWorld
+
+-w /myapp define o WORKDIR do container
+java HelloWorld > executando o .class gerado na etapa de compilação. 
+
+um Dockerfile para esse tipo de tecnologia seria:
+
+from openjdk:11
+copy . /myapp
+workdir /myapp
+run javac Main.java
+CMD java HelloWorld
+
+após o build nesse Dockerfile basta executar um container e já observar no terminal a aplicação printando na tela Hello World. 
+
+docker run java-philips:1.0
+
+
+___ JAVA - JAR ___
+
+com essa mesma imagem do openjdk podemos executar arquivos .jar . Considerando que já temos o .jar em nossa máquina, o Dockerfile para execução ficaria:
+
+FROM openjdk:17-alpine
+WORKDIR /app
+COPY arquivo.jar .
+ENTRYPOINT java -jar arquivo.jar
+
+
+outra opção seria o build e execução do projeto no docker. Dessa forma teríamos um Dockerfile com duas fases . A primeira do build usando o maven e segunda para execução usando o openjdk:
+
+
+FROM maven AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean install
+FROM openjdk:17-alpine
+COPY --from=build /app/target/m2p2-0.0.1-SNAPSHOT.jar m2p2-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/m2p2-0.0.1-SNAPSHOT.jar"]
+
+
+obs: escrever ENTRYPOINT ["java","-jar","/m2p2-0.0.1-SNAPSHOT.jar"] é igual a ENTRYPOINT java -jar /m2p2-0.0.1-SNAPSHOT.jar
+
+
+Próximo passo seria dar build no Dockerfile e executar um container ou mencionar o nome da imagem buildada no compose file .yaml. Porém, algo que aparece com frequência é o campo "build" no lugar de "image" em arquivos compose. Nesse tipo de definição estamos dizendo ao Docker para compilar um arquivo Dockerfile que está na mesma pasta do arquivo yml sem necessariamente darmos um "docker build". Nesse caso, devemos apenas aplicar o arquivo .yaml que o docker fará a compilação E iniciará o container. Tudo com único comando. exemplo: 
+
+version: '3.7'
+services:
+  app:
+    container_name: app
+    build: .
+    ports:
+      - "3000:3000"
+
+
+
+___ PROJETO EM ANGULAR ____
+
+o Dockerfile para compilar e executar projeto usando Angular seria:
+
+# Estágio de construção
+FROM node:14.20-alpine AS build
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Estágio de produção
+FROM nginx:1.17.1-alpine
+COPY --from=build /usr/src/app/dist/notification-app /usr/share/nginx/html
+
+
+também pode ser adotado o caminho que compilar no visual studio e levar apenas para o NGINX (ou apache) os arquivos. Ficaria:
+
+FROM nginx:1.17.1-alpine
+COPY /notification-app /usr/share/nginx/html
+
+
+
+
+Vimos também em aula um exemplo de Dockerfile usando o servidor de aplicativos Wildfly para deploy do arquivo .war (alternativa para o tomcat):
+link documentação imagem: https://quay.io/repository/wildfly/wildfly
+
+FROM quay.io/wildfly/wildfly
+ADD m03s01-1.0-SNAPSHOT.war /opt/jboss/wildfly/standalone/deployments/
+RUN /opt/jboss/wildfly/bin/add-user.sh gabriel gabriel1 --silent
+CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+
+
+dando build na Dockerfile (lembrando que o arquivo .war deve estar na mesma pasta do arquivo Dockerfile) :
+
+docker build -t java-api:1.0 .
+
+executando container:
+
+docker run -d -p 8080:8080 -p 9990:9990 java-api:1.0
+
+-p 8080:8080 >> porta para acessarmos a interface do Swagger da API
+
+-p 9990:9990 >> porta para acessarmos a interface de gerenciamento do Wildfly fazendo login com username e senha definidos no Dockerfile.
+
+acessando no navegador: http://localhost:8080/m03s01-1.0-SNAPSHOT
+                        http://localhost:9990
+
+
+
+
+#### Docker Swarm (formação de cluster e orquestração de container do docker) ###
+
+1° comando de inicialização do Swarm mode no node Master
+
+docker swarm init 
+
+
+2° ingressão dos nodes workers
+
+copiar comando join gerado no master para dentro dos workers
+
+3° listar os nodes do cluster
+
+docker nodes ls 
+
+4° criar os serviços em modo cluster a partir do docker-compose file
+
+docker stack deploy --compose-file=nginx.yml philips
+
+
+criamos a stack. Agora vamos listar se ela está no cluster:
+
+docker stack ls
+
+
+o que fizemos depois foi acessar cada um dos container nginx e alterar o index.html para: Hello from: $HOSTNAME
+Acessando de fora podemos notar que a cada requisição a página index.html uma replica diferente era acionada. Isso é o balanciamento de carga do docker em ação.
+
+
+usamos o Visualizer para ver os servicos criados:
+docker run -it -d -p 8181:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+
+acessando em IP_NODE_MASTER:8181 pode-se observar os nodes membros do cluster bem como os serviços e containers em execução
+
+5° listar servicos criados 
+docker service ls >> no node master apenas
+
+detalhes de onde cada servico está rodando:
+docker service ps nomeservico
+
+6° escalar nosso serviço 
+docker service scale swarm_nginx=2
+
+atualizando a imagem do servico swarm_nginx para nginx:alpine  (observar a atualização dos serviços em paralelismo lá no Visualizer):
+docker service update --image nginx:alpine swarm_nginx
+
+7° excluir serviços criados a partir do stack deploy (semelhante ao docker-compose down)
+docker stack rm nome-stack-deploy
+
+
+Outros parâmetros que podem aparecer dentro de um arquivo .yml para docker swarm:
+
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      replicas: 6
+      placement:
+        max_replicas_per_node: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+
+
+---
+
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+

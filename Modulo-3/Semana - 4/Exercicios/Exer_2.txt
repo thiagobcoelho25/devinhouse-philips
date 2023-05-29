@@ -1,0 +1,3 @@
+* O que é a virtualização de aplicações em contêiner / microserviço? fale com suas palavras…
+
+R: isolamento de serviços e gerenciamento dos mesmos

@@ -1,0 +1,3 @@
+Diga com suas palavras o que é o Kubernetes (k8s)
+
+R: Software de orquestração de contêineres locais ou em cloud.

@@ -1,0 +1,50 @@
+_________KUBERNETES______
+
+.zip dos yaml usados: https://drive.google.com/file/d/1onPsdiBgiqV4Pc4Cs_hR8Oh6VQEZuOkc/view?usp=sharing
+
+
+kubectl apply -f arquivo.yaml > executa o arquivo em formato yaml. Se o kind do arquivo for um Service, o kubernetes criará o serviço, por exemplo. 
+
+kubectl apply -f arquivo.yaml --namespace=nomeNamespace  >> subir uma aplicação em namespace específica. 
+
+kubectl get nodes > mostra quandos nodes temos em nosso cluster e o status de cada um.
+kubectl get pv > mostra os volumes persistentes criados kubectl 
+kubectl get service > mostra os servicos criados 
+kubectl get deploy > mostra os deploy criados
+kubectl get pods > mostra os pods em execução
+kubectl get pods -o wide > mostra mais detalhes dos pods em execução, como o node por exemplo.
+kubectl get secret > mostra os arquivos de senha secret criados
+kubectl get namespaces > mostra os namespaces criados no kubernetes (os default pelo kubernetes e os criados por aplicações)
+
+
+kubectl describe service nome_servico  >  detalha mais informações sobre o serviço. 
+kubectl describe pod nome_pod > detalha mais informações sobre o pod
+kubectl describe secret nome_secret > detalha mais informações sobre a secret.
+kubectl describe deploy nome_deploy > detalha mais informações sobre o deploy
+
+kubectl get deploy nomeDeploy -o yaml > arquivo-result.yaml    >>> exportar em arquivo formato yaml do deploy em execução. 
+
+pra acessar bash do pod:
+kubectl exec -it nomePod -- bash ou /bin/bash ou /bin/sh
+
+
+kubectl delete -f arquivo.yaml > deleta tudo que foi criado  a partir do arquivo yaml. 
+kubectl delete pod nome_pod > deleta o pod informado
+kubectl delete deploy nome_deploy > deleta deploy informado...
+
+
+kubectl run web --image=nginx   > subir um pod (container) com imagem nginx (servidor http)
+
+kubectl create deployment web-2 --image=nginx --replicas=2   >> Criar um deploy que criará automaticamente dois pods com imagem do nginx
+
+
+ESCALAR APLICAÇÃO: 
+
+kubectl autoscale deployment web-2 --min=2 --max=10
+
+ou via arquivo .yaml 
+
+atualizar imagem de uma aplicação em execução : 
+kubectl set image web-2 nginx=nginx:alpine
+
+usamos o nginx na versão alpine como exemplo. Após o comando vimos os pods novos sendo criados e os antigos sendo terminados.
